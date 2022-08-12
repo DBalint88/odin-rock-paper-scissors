@@ -9,9 +9,7 @@ let roundNumber = 1;
 
 let nextRoundButton = document.getElementById("next-round")
 let newGameButton = document.getElementById("new-game")
-let rockButton = document.getElementById("rock-button")
-let paperButton = document.getElementById("paper-button")
-let scissorsButton = document.getElementById("scissors-button")
+let selectionButtons = document.getElementsByClassName("selection-button")
 
 let roundNumberSpan = document.getElementById("round-number")
 let playerChoiceSpan = document.getElementById("player-choice")
@@ -31,30 +29,30 @@ function updateInfo() {
 }
 
 function compChoose() {
-    let j = Math.floor(Math.random * 3);
+    let j = Math.floor(Math.random() * 3);
     if (j == 0) {
-        return "rock";
+        return "Rock";
     }
     if (j == 1) {
-        return "paper";
+        return "Paper";
     }
     if (j == 2) {
-        return "scissors";
+        return "Scissors";
     }
 }
 
 function decideVictor() {
-    if ((playerChoice == "rock" && computerChoice == "scissors") ||
-         (playerChoice == "paper" && computerChoice == "rock") ||
-         (playerChoice == "scissors" && computerChoice == "paper")) {
+    if ((playerChoice == "Rock" && computerChoice == "Scissors") ||
+         (playerChoice == "Paper" && computerChoice == "Rock") ||
+         (playerChoice == "Scissors" && computerChoice == "Paper")) {
             result = "Player Wins!";
             playerScore++
     }
 
-    if ((playerChoice === "rock" && computerChoice == "paper") ||
-         (playerChoice == "paper" && computerChoice == "scissors") ||
-         (playerChoice == "scissors" && computerChoice == "rock")) {
-            result = "Computer Winds!";
+    if ((playerChoice === "Rock" && computerChoice == "Paper") ||
+         (playerChoice == "Paper" && computerChoice == "Scissors") ||
+         (playerChoice == "Scissors" && computerChoice == "Rock")) {
+            result = "Computer Wins!";
             computerScore++;
          }
 
@@ -63,10 +61,13 @@ function decideVictor() {
     }
 }
 
-function rockClick() {
-    playerChoice = "rock";
-    computerChoice = compChoose;
-    decideVictor;
+function playerSelection() {
+    playerChoice = this.innerHTML
+    computerChoice = compChoose();
+    decideVictor();
     roundNumber++
-    updateInfo;
+    updateInfo();
+}
+for (let i = 0; i < selectionButtons.length; i++) {
+    selectionButtons[i].addEventListener("click", playerSelection);
 }
