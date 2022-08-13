@@ -5,9 +5,6 @@ let playerScore = 0;
 let computerScore = 0;
 let roundNumber = 1;
 
-
-
-let nextRoundButton = document.getElementById("next-round")
 let newGameButton = document.getElementById("new-game")
 let selectionButtons = document.getElementsByClassName("selection-button")
 
@@ -71,3 +68,15 @@ function playerSelection() {
 for (let i = 0; i < selectionButtons.length; i++) {
     selectionButtons[i].addEventListener("click", playerSelection);
 }
+
+function newGame() {
+    playerChoice = "";
+    computerChoice = "";
+    result = ""
+    playerScore = 0;
+    computerScore = 0;
+    roundNumber = 1;
+    updateInfo();
+}
+
+newGameButton.addEventListener("click", newGame);
