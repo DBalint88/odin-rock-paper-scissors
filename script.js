@@ -58,18 +58,37 @@ function decideVictor() {
     }
 }
 
-function playerSelection() {
+function playRound() {
     playerChoice = this.innerHTML
     computerChoice = compChoose();
     decideVictor();
+    if (playerScore == 5) {
+        for (const el of selectionButtons) {
+            el.style.display = "none"
+        }
+        updateInfo()
+        setTimeout(function () { alert("Player wins the Match!"); }, 10);
+        return;
+    }
+    if (computerScore == 5) {
+        for (const el of selectionButtons) {
+            el.style.display = "none"
+        }
+        updateInfo()
+        setTimeout(function() { alert("Computer wins the Match!"); }, 10);      
+        return;
+    }
     roundNumber++
     updateInfo();
 }
 for (let i = 0; i < selectionButtons.length; i++) {
-    selectionButtons[i].addEventListener("click", playerSelection);
+    selectionButtons[i].addEventListener("click", playRound);
 }
 
 function newGame() {
+    for (const el of selectionButtons) {
+        el.style.display = "inline"
+    }
     playerChoice = "";
     computerChoice = "";
     result = ""
